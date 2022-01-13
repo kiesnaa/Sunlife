@@ -1,11 +1,11 @@
 <aura:component controller="ListAccount" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction,lightning:isUrlAddressable" access="global" >
 
-    
     <aura:attribute type="Account[]" name="acctList"/>
-   <aura:handler name="init" value="{!this}" action="{!c.fetchAccounts}"/> 
-   <lightning:input type="text" name="searchKey" label="Enter" aura:id="searchKey" onchange="{!c.searchKeyChange}" placeholder="Search by Name" />
-   <lightning:input type="text" name="searchKey2" label="Enter" aura:id="searchKey2" onchange="{!c.searchKeyChange2}" placeholder="Search by Owner" />
-    <span> </span><table class="slds-table slds-table_bordered slds-table_cell-buffer">
+     <lightning:input type="text" name="searchKey" label="Search by Name" aura:id="searchKey" onchange="{!c.searchKeyChange}" placeholder="Search by Name" />
+   <br/>
+    <aura:handler name="init" value="{!this}" action="{!c.fetchAccounts}"/> 
+    
+   <table class="slds-table slds-table_bordered slds-table_cell-buffer">
         <thead>
             <tr class="slds-text-title_caps">
                 <th scope="col">
@@ -28,7 +28,7 @@
         <tbody>
          <aura:iteration items="{!v.acctList}" var="a">
                 <tr>
-                     <a href="{! '#Account/' + a.Id }" target="_blank">
+                    <a href="{! '//kiesnaa-dev-ed.lightning.force.com/lightning/r/Account/' + a.Id + '/view'}" target="_blank">
                     <td data-label="Account Name">
                         <div class="slds-truncate" title="">{!a.Name}</div>
                     </td>
