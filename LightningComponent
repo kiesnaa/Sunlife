@@ -1,0 +1,52 @@
+<aura:component controller="ListAccount" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction,lightning:isUrlAddressable" access="global" >
+
+    
+    <aura:attribute type="Account[]" name="acctList"/>
+   <aura:handler name="init" value="{!this}" action="{!c.fetchAccounts}"/> 
+   <lightning:input type="text" name="searchKey" label="Enter" aura:id="searchKey" onchange="{!c.searchKeyChange}" placeholder="Search by Name" />
+   <lightning:input type="text" name="searchKey2" label="Enter" aura:id="searchKey2" onchange="{!c.searchKeyChange2}" placeholder="Search by Owner" />
+    <span> </span><table class="slds-table slds-table_bordered slds-table_cell-buffer">
+        <thead>
+            <tr class="slds-text-title_caps">
+                <th scope="col">
+                    <div class="slds-truncate" title="Account Name">Account Name</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate" title="Account Owner">Account Owner</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate" title="Phone">Phone</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate" title="Website">Website</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate" title="Annual Revenue">Annual Revenue</div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+         <aura:iteration items="{!v.acctList}" var="a">
+                <tr>
+                     <a href="{! '#Account/' + a.Id }" target="_blank">
+                    <td data-label="Account Name">
+                        <div class="slds-truncate" title="">{!a.Name}</div>
+                    </td>
+                    </a>
+                    <td data-label="Account Owner">
+                        <div class="slds-truncate" title="">{!a.Owner.Name}</div>
+                    </td>
+                    <td data-label="Phone">
+                        <div class="slds-truncate" title="">{!a.Phone}</div>
+                    </td>
+                    <td data-label="Website">
+                        <div class="slds-truncate" title="">{!a.Website}</div>
+                    </td>
+                    <td data-label="Annual Revenue">
+                        <div class="slds-truncate" title="">{!a.AnnualRevenue}</div>
+                    </td>
+                </tr>
+            </aura:iteration>
+        </tbody>
+    </table>
+</aura:component>
