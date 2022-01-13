@@ -10,23 +10,12 @@
             "searchKey": searchKey
         });
         action.setCallback(this, function(a) {
-            component.set("v.acctList", a.getReturnValue());
+            component.set('v.acctList', a.getReturnValue());
+            component.set('v.a.Id',findByName.Id);
         });
         $A.enqueueAction(action);
     },
-    searchKeyChange2: function(component, event) {
-        var searchKey2 = component.find("searchKey2").get("v.value");
-        console.log('searchKey2'+searchKey2);
-        var action = component.get("c.findByOwner");
-        action.setParams({
-            "searchKey2": searchKey2
-        });
-        action.setCallback(this, function(a) {
-            component.set("v.acctList", a.getReturnValue());
-        });
-        $A.enqueueAction(action);
-    },
-    
+
 fetchAccounts : function(component, event, helper) {
         var action = component.get('c.getRecords');
         action.setParams({
@@ -35,6 +24,7 @@ fetchAccounts : function(component, event, helper) {
             var state = response.getState();
             if (state === "SUCCESS") {
                 component.set('v.acctList', response.getReturnValue());
+                 component.set('v.a.Id',getRecords.Id);
             }
         });
         $A.enqueueAction(action);
