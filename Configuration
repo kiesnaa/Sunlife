@@ -5,3 +5,5 @@ this custom profile.
 Navigate to Sharring Settings and made Accounts default access private.
 created new profile and assign the Account object with Read/write access.
 assign new user to the profile.
+
+I have created Lightning App page and Tab for the Account List, under Buttons & Links section.
