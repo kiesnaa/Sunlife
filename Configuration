@@ -1,0 +1,7 @@
+Set Organization Wide Default of the Account object to Private.
+Create a custom profile with Create, Read & Edit access to the Account object. Assign a user to
+this custom profile.
+
+Navigate to Sharring Settings and made Accounts default access private.
+created new profile and assign the Account object with Read/write access.
+assign new user to the profile.
