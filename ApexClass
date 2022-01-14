@@ -1,14 +1,14 @@
 public class ListAccount{
     @AuraEnabled
     public static list<Account> fetchAccts(){
-        list<Account> myrecords = [Select id,OwnerId,Name,Owner.Name,Phone,Website,AnnualRevenue from Account where Industry = 'Financial Services'];
+        list<Account> myrecords = [Select id,OwnerId,Name,KrushnajiPluto__Account_Owner__c,Phone,Website,AnnualRevenue from Account where Industry = 'Financial Services'];
         return myrecords;
 
     }
     @AuraEnabled
 public static List<Account> findByName(String searchKey) {
         String name =  + searchKey + '%';
-        return [SELECT id,Name,Owner.Name,Phone,Website,AnnualRevenue FROM Account WHERE name LIKE :name];
+        return [SELECT id,Name,KrushnajiPluto__Account_Owner__c,Phone,Website,AnnualRevenue FROM Account WHERE name LIKE :name];
     }
     
     @AuraEnabled    
