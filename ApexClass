@@ -8,7 +8,7 @@ public class ListAccount{
     @AuraEnabled
 public static List<Account> findByName(String searchKey) {
         String name =  + searchKey + '%';
-        return [SELECT id,Name,KrushnajiPluto__Account_Owner__c,Phone,Website,AnnualRevenue FROM Account WHERE name LIKE :name];
+        return [SELECT id,Name,KrushnajiPluto__Account_Owner__c,Phone,Website,AnnualRevenue FROM Account WHERE Industry = 'Financial Services' and name LIKE :name];
     }
     
     @AuraEnabled    
