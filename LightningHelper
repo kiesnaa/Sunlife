@@ -14,15 +14,14 @@
                             fieldName: 'Name'
                         }
                     }},    
-            {label: 'Account Owner', fieldName: 'OwnerId.Name', type: 'text'},    
+            {label: 'Account Owner', fieldName: 'KrushnajiPluto__Account_Owner__c', type: 'text'},    
             {label: 'Phone', fieldName: 'Phone', type: 'text',editable:'true'},
             {label: 'Website', fieldName: 'Website', type: 'URL',editable:'true'},  
             {label: 'Annual Revenue', fieldName: 'AnnualRevenue', type: 'text',editable:'true'},  
-        ]);
-        
+        ]); 
+                          
                 var lstAccounts = response.getReturnValue();
                 
-          
                 lstAccounts.forEach(function(item){
                     item['AccountUrl'] = '/lightning/r/Account/' +item['Id'] +'/view';
                 });
