@@ -1,6 +1,44 @@
-({
-    doInit: function(component, event, helper) {
-        helper.getAccountList(component);
+({    
+      
+    onInit : function( component, event, helper ) {    
+        helper.fetchAccounts(component);  
+          
+    },  
+      
+    onSave : function( component, event, helper ) {   
+          
+        var updatedRecords = component.find( "acctTable" ).get( "v.draftValues" );  
+        var action = component.get( "c.updateAccts" );  
+        action.setParams({  
+              
+            'updatedAccountList' : updatedRecords  
+              
+        });  
+        action.setCallback( this, function( response ) {  
+              
+            var state = response.getState();   
+            if ( state === "SUCCESS" ) {  
+  
+                if ( response.getReturnValue() === true ) {  
+                      
+                    helper.toastMsg( 'success', 'Records Saved Successfully.' );  
+                    component.find( "acctTable" ).set( "v.draftValues", null );  
+                      
+                } else {   
+                      
+                    helper.toastMsg( 'error', 'Something went wrong. Contact your system administrator.' );  
+                      
+                }  
+                  
+            } else {  
+                  
+                helper.toastMsg( 'error', 'Something went wrong. Contact your system administrator.' );  
+                  
+            }  
+              
+        });  
+        $A.enqueueAction( action );  
+          
     },
     searchKeyChange: function(component, event) {
         var searchKey = component.find("searchKey").get("v.value");
@@ -9,25 +47,33 @@
         action.setParams({
             "searchKey": searchKey
         });
-        action.setCallback(this, function(a) {
-            component.set('v.acctList', a.getReturnValue());
-            component.set('v.a.Id',findByName.Id);
+        action.setCallback(this, function(response) {
+var state = response.getState();    
+            if (state === "SUCCESS")     
+                
+                        component.set( 'v.mycolumns', [    
+             {label: 'Name', fieldName: 'AccountUrl', type: 'url',  typeAttributes:{
+                        label: {
+                            fieldName: 'Name'
+                        }
+                    }},    
+            {label: 'Account Owner', fieldName: 'OwnerId.Name', type: 'String'},    
+            {label: 'Phone', fieldName: 'Phone', type: 'text',editable:'true'},
+            {label: 'Website', fieldName: 'Website', type: 'URL',editable:'true'},  
+            {label: 'Annual Revenue', fieldName: 'AnnualRevenue', type: 'text',editable:'true'},  
+        ]); 
+                            // Get all the Acocunts from the response.
+                var lstAccounts = response.getReturnValue();
+                
+                // Loop through all the Accounts and add Attribute AccountUrl for each record.
+                // The value for it should be the Url of the Account
+                lstAccounts.forEach(function(item){
+                    item['AccountUrl'] = '/lightning/r/Account/' +item['Id'] +'/view';
+                });
+                
+                component.set( "v.acctList", response.getReturnValue() ); 
         });
         $A.enqueueAction(action);
     },
-
-fetchAccounts : function(component, event, helper) {
-        var action = component.get('c.getRecords');
-        action.setParams({
-        });
-        action.setCallback(this, function(response){
-            var state = response.getState();
-            if (state === "SUCCESS") {
-                component.set('v.acctList', response.getReturnValue());
-                 component.set('v.a.Id',getRecords.Id);
-            }
-        });
-        $A.enqueueAction(action);
-    }
-    
+      
 })
