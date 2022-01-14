@@ -1,9 +1,9 @@
 public class ListAccount{
     @AuraEnabled
-    public static list<Account> getRecords(){
-        string userId = UserInfo.getUserId();
-        list<Account> myrecords = [Select id,OwnerId,Name,Owner.Name,Phone,Website,AnnualRevenue from Account where Industry = 'Financial Services' and ownerid = :userId];
+    public static list<Account> fetchAccts(){
+        list<Account> myrecords = [Select id,OwnerId,Name,Owner.Name,Phone,Website,AnnualRevenue from Account where Industry = 'Financial Services'];
         return myrecords;
+
     }
     @AuraEnabled
 public static List<Account> findByName(String searchKey) {
@@ -11,10 +11,19 @@ public static List<Account> findByName(String searchKey) {
         return [SELECT id,Name,Owner.Name,Phone,Website,AnnualRevenue FROM Account WHERE name LIKE :name];
     }
     
-    @AuraEnabled
-public static List<Account> findByOwner(String searchKey2) {
-        String name =  + searchKey2 + '%';
-        return [SELECT id,Name,Owner.Name,Phone,Website,AnnualRevenue FROM Account WHERE name LIKE :name];
+    @AuraEnabled    
+    public static boolean updateAccts( List < Account > updatedAccountList ) {    
+            
+        try {  
+          
+            update updatedAccountList;  
+            return true;  
+              
+        } catch(Exception e) {  
+          
+            return false;  
+              
+        }  
+            
+    }    
     }
-    }
-
