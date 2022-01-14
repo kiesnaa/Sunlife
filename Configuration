@@ -1,6 +1,6 @@
 Set Organization Wide Default of the Account object to Private.
 Create a custom profile with Create, Read & Edit access to the Account object. Assign a user to
-this custom profile.
+this custom profile and check Lightning Experience User checkbox from Administrative settings.
 
 Navigate to Sharring Settings and made Accounts default access private.
 created new profile and assign the Account object with Read/write access.
