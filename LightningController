@@ -62,11 +62,8 @@ var state = response.getState();
             {label: 'Website', fieldName: 'Website', type: 'URL',editable:'true'},  
             {label: 'Annual Revenue', fieldName: 'AnnualRevenue', type: 'text',editable:'true'},  
         ]); 
-                            // Get all the Acocunts from the response.
                 var lstAccounts = response.getReturnValue();
                 
-                // Loop through all the Accounts and add Attribute AccountUrl for each record.
-                // The value for it should be the Url of the Account
                 lstAccounts.forEach(function(item){
                     item['AccountUrl'] = '/lightning/r/Account/' +item['Id'] +'/view';
                 });
